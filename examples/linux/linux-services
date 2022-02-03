@@ -1,0 +1,13 @@
+integrations:
+  - name: nri-flex
+    config:
+      name: linuxFileSystemIntegration
+      apis:
+        - name: LinuxServices
+          commands:
+            - run: 'systemctl list-units --type=service --state=active'
+              split: horizontal
+              split_by: \s+
+              row_start: 1
+              set_header: [unit,load,active,sub]
+          perc_to_decimal: true
